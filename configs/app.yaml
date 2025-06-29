@@ -1,0 +1,7 @@
+splunk:
+  url: "https://splunk.internal"
+  token: "your-token"
+feeds:
+  schedule: "30m"
+alert:
+  slack_webhook: "https://hooks.slack.com/..."
