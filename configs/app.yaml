@@ -1,7 +1,14 @@
-splunk:
-  url: "https://splunk.internal"
-  token: "your-token"
+# Application behavior configuration
+
+log:
+  level: "info"
+
 feeds:
-  schedule: "30m"
-alert:
-  slack_webhook: "https://hooks.slack.com/..."
+  schedule: "30m" # Cron schedule for fetching new vulnerabilities
+  # You can add more feed-specific configurations here
+  # Example:
+  # opencve:
+  #   timeout: "1m"
+
+matcher:
+  fuzzy_score_threshold: 0.8

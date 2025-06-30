@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  # Overrides for development environment to enable live-reloading
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: vulnsense_scheduler_dev
+    command: ["air", "-c", ".air_scheduler.toml"]
+    volumes:
+      - .:/app
+    networks:
+      - vulnsense_net
+    # No need for depends_on here as the base compose file handles it
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: vulnsense_worker_dev
+    command: ["air", "-c", ".air_worker.toml"]
+    volumes:
+      - .:/app
+    ports:
+      - "8080:8080" # Expose a port if your worker runs a web server for metrics/health checks
+    networks:
+      - vulnsense_net
+
+  # --- Infrastructure Overrides ---
+  postgres:
+    # image: postgres:15-alpine # This is inherited from the base file
+    container_name: vulnsense_postgres_dev
+    ports:
+      - "5433:5432" # Use a different host port to avoid conflicts
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+
+  redis:
+    # image: redis:7-alpine # This is inherited from the base file
+    container_name: vulnsense_redis_dev
+    ports:
+      - "6380:6379" # Use a different host port
+    volumes:
+      - redis_data_dev:/data
+
+# Development-specific volumes
+volumes:
+  postgres_data_dev:
+  redis_data_dev:
+
+# --- Networks and Volumes ---
+networks:
+  vulnsense_net:
+    driver: bridge
+
+volumes:
+  postgres_data_dev:
+  redis_data_dev: 

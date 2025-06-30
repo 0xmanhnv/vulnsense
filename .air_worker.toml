@@ -1,0 +1,20 @@
+# .air_worker.toml
+# Config for Air to run the worker process with live-reloading.
+
+root = "."
+tmp_dir = "tmp"
+
+[build]
+  # We still build both binaries, but only run the worker.
+  cmd = "go build -o ./tmp/worker ./cmd/vulnsense && go build -o ./tmp/scheduler ./cmd/scheduler"
+  bin = "./tmp/worker"
+  full_bin = ""
+  delay = 1000
+  stop_on_error = true
+  log = "air_worker_errors.log"
+
+[log]
+  time = true
+
+[misc]
+  clean_on_exit = true 

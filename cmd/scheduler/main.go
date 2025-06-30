@@ -1,4 +1,4 @@
-// Command vulnsense is the main application binary that runs the background worker.
+// Command scheduler is a standalone application that enqueues periodic tasks.
 package main
 
 import (
@@ -8,7 +8,6 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"vulnsense/internal/app"
 	"vulnsense/internal/config"
 	"vulnsense/internal/task"
 
@@ -17,7 +16,7 @@ import (
 
 func main() {
 	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
-	logger.Info("Starting worker process")
+	logger.Info("Starting scheduler process")
 
 	cfg, err := config.NewConfig()
 	if err != nil {
@@ -35,20 +34,12 @@ func main() {
 	ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer cancel()
 
-	// The worker needs the full app dependency container to run the use cases
-	appInstance, err := app.New(ctx)
-	if err != nil {
-		logger.Error("failed to create app instance for worker", "error", err)
-		os.Exit(1)
-	}
-	defer appInstance.Stop()
-
-	processor := task.NewProcessor(redisConnectionOpt, appInstance, logger)
-	if err := processor.Start(appInstance); err != nil {
-		logger.Error("failed to start task processor", "error", err)
+	scheduler := task.NewScheduler(redisConnectionOpt, logger)
+	if err := scheduler.Start(); err != nil {
+		logger.Error("failed to start scheduler", "error", err)
 		os.Exit(1)
 	}
 
 	<-ctx.Done() // Wait for shutdown signal
-	logger.Info("Worker process shutting down")
+	logger.Info("Scheduler process shutting down")
 }

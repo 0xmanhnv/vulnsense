@@ -1,0 +1,127 @@
+- url: https://rss.app/feeds/HR7aGPxsSg5UDM2o.xml
+  type: blog
+  source: Unknown
+
+- url: https://www.cisa.gov/cybersecurity-advisories/all.xml
+  type: advisory
+  source: CISA
+
+- url: https://vuldb.com/?rss.recent
+  type: vulnerability
+  source: VulDB
+
+- url: https://liferay.dev/.../jekt/rss
+  type: vendor-advisory
+  source: Liferay
+
+- url: https://www.exploit-db.com/rss.xml
+  type: exploit
+  source: ExploitDB
+
+- url: https://msrc.microsoft.com/blog/feed
+  type: vendor-advisory
+  source: Microsoft MSRC
+
+- url: https://portswigger.net/daily-swig/rss
+  type: news
+  source: PortSwigger
+
+- url: https://securityonline.info/feed/
+  type: blog
+  source: SecurityOnline
+
+- url: https://www.helpnetsecurity.com/feed/
+  type: news
+  source: HelpNetSecurity
+
+- url: https://www.grahamcluley.com/feed/
+  type: blog
+  source: Graham Cluley
+
+- url: https://news.sophos.com/en-us/feed/
+  type: vendor-blog
+  source: Sophos
+
+- url: https://feeds.feedblitz.com/thesecurityledger
+  type: blog
+  source: The Security Ledger
+
+- url: https://www.techworm.net/feed/
+  type: blog
+  source: TechWorm
+
+- url: https://informationsecuritybuzz.com/feed/
+  type: news
+  source: InfoSecBuzz
+
+- url: https://binaryblogger.com/.../securitynews/feed/
+  type: blog
+  source: BinaryBlogger
+
+- url: https://gbhackers.com/feed/
+  type: blog
+  source: GBHackers
+
+- url: https://krebsonsecurity.com/feed
+  type: blog
+  source: KrebsOnSecurity
+
+- url: https://feeds.feedburner.com/TheHackersNews
+  type: news
+  source: The Hacker News
+
+- url: https://threatpost.com/feed/
+  type: blog
+  source: Threatpost
+
+- url: https://www.darkreading.com/rss.xml
+  type: news
+  source: DarkReading
+
+- url: https://www.bleepingcomputer.com/feed/
+  type: news
+  source: BleepingComputer
+
+- url: https://www.securityweek.com/feed/
+  type: news
+  source: SecurityWeek
+
+- url: http://feeds.feedburner.com/Nixcraft-LinuxFreebsdSolarisTipsTricks
+  type: sysadmin-tips
+  source: nixCraft
+
+- url: http://www.reddit.com/r/netsec/.rss
+  type: community
+  source: RedditNetsec
+
+- url: https://googleprojectzero.blogspot.com/feeds/posts/default
+  type: research
+  source: Google Project Zero
+
+- url: http://blog.trailofbits.com/feed/
+  type: research
+  source: Trail of Bits
+
+- url: https://research.kudelskisecurity.com/feed/
+  type: research
+  source: Kudelski Security
+
+- url: https://blog.skullsecurity.org/
+  type: research
+  source: SkullSecurity
+
+- url: https://www.imperialviolet.org/iv-rss.xml
+  type: cryptography
+  source: Adam Langley (Google)
+
+- url: http://feeds.feedburner.com/schneier/fulltext
+  type: blog
+  source: Bruce Schneier
+
+- url: https://cvefeed.io/rssfeed/severity/high.xml
+  type: cve
+  source: CVEFeed.io
+
+- url: https://api.msrc.microsoft.com/update-guide/rss
+  type: cve
+  source: Microsoft MSRC

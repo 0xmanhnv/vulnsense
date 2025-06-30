@@ -1,0 +1,35 @@
+# Git
+.git
+.gitignore
+
+# IDE and editor files
+.idea/
+.vscode/
+
+# Docker files
+.dockerignore
+Dockerfile
+Dockerfile.dev
+docker-compose.yml
+docker-compose.dev.yml
+
+# Go build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+vulnsense
+
+# Temporary files from air
+tmp/
+air.log
+
+# Air configuration
+.air.toml
+
+# Local environment variables
+.env
+
+# Documentation files
+*.md 

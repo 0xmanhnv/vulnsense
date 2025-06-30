@@ -1,0 +1,22 @@
+# Dockerfile.dev
+# This Dockerfile is for the development environment.
+# It uses air for live-reloading.
+
+FROM golang:1.24-alpine
+
+# Install air for live reloading and other necessary tools
+RUN go install github.com/cosmtrek/air@latest && \
+    apk add --no-cache git
+
+WORKDIR /app
+
+# Copy go.mod and go.sum files to download dependencies
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Copy the rest of the application source code
+COPY . .
+
+# The command to run the application with live-reloading
+# The server will be available on the port you expose in your app (e.g., 8080)
+CMD ["air", "-c", ".air.toml"] 
