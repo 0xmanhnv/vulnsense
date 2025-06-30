@@ -27,16 +27,16 @@ The application runs as two separate binaries, orchestrated by Docker Compose. T
 graph TD
     subgraph "Docker Environment"
         subgraph "Scheduler Service"
-            Scheduler[<B>Scheduler</B><br/>(cmd/scheduler)<br/>- Enqueues tasks on a schedule<br/>- e.g., 'Fetch Vulns Daily']
+            Scheduler["<b>Scheduler</b><br/>(cmd/scheduler)<br/>- Enqueues tasks on a schedule<br/>- e.g., 'Fetch Vulns Daily'"]
         end
 
         subgraph "Worker Service"
-            Worker[<B>Worker</B><br/>(cmd/vulnsense)<br/>- Pulls tasks from the queue<br/>- Executes business logic<br/>- Interacts with DB and external APIs]
+            Worker["<b>Worker</b><br/>(cmd/vulnsense)<br/>- Pulls tasks from the queue<br/>- Executes business logic<br/>- Interacts with DB and external APIs"]
         end
         
         subgraph "Infrastructure"
-            Queue[(<B>Redis Queue</B><br/>Asynq)]
-            DB[(<B>PostgreSQL</B><br/>Vulnerabilities, Assets, Findings)]
+            Queue[("<b>Redis Queue</b><br/>Asynq")]
+            DB[("<b>PostgreSQL</b><br/>Vulnerabilities, Assets, Findings")]
         end
 
         Scheduler -- "1. Enqueue Task" --> Queue

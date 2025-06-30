@@ -71,20 +71,20 @@ This "inverts" the natural flow of control, ensuring our core business logic is 
 ```mermaid
 graph TD
     subgraph "Layer 1: Wiring (internal/app)"
-        AppWiring("<b>app.New()</b><br/>- Reads config<br/>- Instantiates concrete fetchers<br/>- Injects them into UseCase")
+        AppWiring["`app.New()`<br/>- Reads config<br/>- Instantiates concrete fetchers<br/>- Injects them into UseCase"]
     end
 
     subgraph "Layer 2: Use Cases (internal/usecase)"
-        FetchUseCase("<b>FetchVulnerabilitiesUseCase</b><br/>- Holds a list: <i>[]feed.Fetcher</i><br/>- Calls <i>fetcher.Fetch()</i> in a loop")
+        FetchUseCase["`FetchVulnerabilitiesUseCase`<br/>- Holds a list: `[]feed.Fetcher`<br/>- Calls `fetcher.Fetch()` in a loop"]
     end
 
     subgraph "Layer 3: Public Interface (pkg/feed)"
-        FetcherInterface("<b>interface feed.Fetcher</b><br/>Defines the contract")
+        FetcherInterface["`interface feed.Fetcher`<br/>Defines the contract"]
     end
 
     subgraph "Layer 4: Concrete Implementations (pkg/feed/*)"
-        OpenCVE("<b>opencve.Fetcher</b><br/>- Implements feed.Fetcher<br/>- Knows OpenCVE API details")
-        JsonURL("<b>jsonurl.Fetcher</b><br/>- Implements feed.Fetcher<br/>- Knows how to read from a URL")
+        OpenCVE["`opencve.Fetcher`<br/>- Implements feed.Fetcher<br/>- Knows OpenCVE API details"]
+        JsonURL["`jsonurl.Fetcher`<br/>- Implements feed.Fetcher<br/>- Knows how to read from a URL"]
     end
 
     AppWiring -->|instantiates| OpenCVE
