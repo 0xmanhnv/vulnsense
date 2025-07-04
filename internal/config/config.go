@@ -1,23 +1,66 @@
 package config
 
 import (
+	"fmt"
+	"os"
 	"strings"
+	"time"
 
 	"github.com/spf13/viper"
+	"gopkg.in/yaml.v3"
 )
+
+// RSSSource represents a single RSS feed source
+type RSSSource struct {
+	Name    string `yaml:"name"`
+	URL     string `yaml:"url"`
+	Type    string `yaml:"type"`   // blog, advisory, vulnerability, etc.
+	Source  string `yaml:"source"` // source name
+	Enabled bool   `yaml:"enabled"`
+}
+
+// DatabaseConfig holds configuration for any database type (new multi-database support)
+type DatabaseConfig struct {
+	// Database type
+	Type string `mapstructure:"type" yaml:"type"`
+
+	// Connection details
+	Host     string `mapstructure:"host" yaml:"host"`
+	Port     int    `mapstructure:"port" yaml:"port"`
+	User     string `mapstructure:"user" yaml:"user"`
+	Password string `mapstructure:"password" yaml:"password"`
+	Name     string `mapstructure:"name" yaml:"name"`
+
+	// PostgreSQL specific
+	SSLMode string `mapstructure:"sslmode" yaml:"sslmode"`
+
+	// Connection pool settings
+	MaxConnections int           `mapstructure:"max_connections" yaml:"max_connections"`
+	MinConnections int           `mapstructure:"min_connections" yaml:"min_connections"`
+	MaxLifetime    time.Duration `mapstructure:"max_lifetime" yaml:"max_lifetime"`
+	MaxIdleTime    time.Duration `mapstructure:"max_idle_time" yaml:"max_idle_time"`
+
+	// Additional options
+	Options map[string]interface{} `mapstructure:"options" yaml:"options"`
+}
 
 // Config holds all configuration for the application.
 type Config struct {
-	AppEnv   string `mapstructure:"APP_ENV"`
-	Log      LogConfig
-	DB       DBConfig
-	Cache    CacheConfig
-	Feeds    FeedsConfig
-	Splunk   SplunkConfig
-	Slack    SlackConfig
-	Telegram TelegramConfig
-	Matcher  MatcherConfig
-	Redis    RedisConfig
+	AppEnv     string `mapstructure:"APP_ENV"`
+	Log        LogConfig
+	DB         DBConfig
+	Cache      CacheConfig
+	Feeds      FeedsConfig
+	Splunk     SplunkConfig
+	Slack      SlackConfig
+	Telegram   TelegramConfig
+	Matcher    MatcherConfig
+	Redis      RedisConfig
+	RSSSources []RSSSource `mapstructure:"rss_sources"`
+
+	// New multi-database support
+	Database  DatabaseConfig            `mapstructure:"database" yaml:"database"`
+	Databases map[string]DatabaseConfig `mapstructure:"databases" yaml:"databases"`
 }
 
 // LogConfig holds logging configuration.
@@ -25,7 +68,7 @@ type LogConfig struct {
 	Level string `mapstructure:"level"`
 }
 
-// DBConfig holds database configuration.
+// DBConfig holds database configuration (existing, for backward compatibility).
 type DBConfig struct {
 	Host     string `mapstructure:"host"`
 	Port     int    `mapstructure:"port"`
@@ -105,5 +148,37 @@ func NewConfig() (*Config, error) {
 		return nil, err
 	}
 
+	// Load RSS sources from sources.yaml
+	if err := cfg.loadRSSSources(); err != nil {
+		return nil, fmt.Errorf("failed to load RSS sources: %w", err)
+	}
+
 	return &cfg, nil
+}
+
+// loadRSSSources loads RSS sources from the sources.yaml file
+func (c *Config) loadRSSSources() error {
+	sourcesFile := "./configs/sources.yaml"
+
+	// Check if file exists
+	if _, err := os.Stat(sourcesFile); os.IsNotExist(err) {
+		// File doesn't exist, return empty sources
+		c.RSSSources = []RSSSource{}
+		return nil
+	}
+
+	// Read the file
+	data, err := os.ReadFile(sourcesFile)
+	if err != nil {
+		return fmt.Errorf("failed to read sources file: %w", err)
+	}
+
+	// Parse YAML
+	var sources []RSSSource
+	if err := yaml.Unmarshal(data, &sources); err != nil {
+		return fmt.Errorf("failed to parse sources YAML: %w", err)
+	}
+
+	c.RSSSources = sources
+	return nil
 }

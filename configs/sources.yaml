@@ -1,127 +1,191 @@
-- url: https://rss.app/feeds/HR7aGPxsSg5UDM2o.xml
+- name: "RSS App Feed"
+  url: https://rss.app/feeds/HR7aGPxsSg5UDM2o.xml
   type: blog
   source: Unknown
+  enabled: false
 
-- url: https://www.cisa.gov/cybersecurity-advisories/all.xml
+- name: "CISA Advisories"
+  url: https://www.cisa.gov/cybersecurity-advisories/all.xml
   type: advisory
   source: CISA
+  enabled: true
 
-- url: https://vuldb.com/?rss.recent
+- name: "VulDB Recent"
+  url: https://vuldb.com/?rss.recent
   type: vulnerability
   source: VulDB
+  enabled: true
 
-- url: https://liferay.dev/.../jekt/rss
+- name: "Liferay Security"
+  url: https://liferay.dev/.../jekt/rss
   type: vendor-advisory
   source: Liferay
+  enabled: false
 
-- url: https://www.exploit-db.com/rss.xml
+- name: "Exploit-DB"
+  url: https://www.exploit-db.com/rss.xml
   type: exploit
   source: ExploitDB
+  enabled: true
 
-- url: https://msrc.microsoft.com/blog/feed
+- name: "Microsoft MSRC Blog"
+  url: https://msrc.microsoft.com/blog/feed
   type: vendor-advisory
   source: Microsoft MSRC
+  enabled: true
 
-- url: https://portswigger.net/daily-swig/rss
+- name: "PortSwigger Daily Swig"
+  url: https://portswigger.net/daily-swig/rss
   type: news
   source: PortSwigger
+  enabled: true
 
-- url: https://securityonline.info/feed/
+- name: "SecurityOnline"
+  url: https://securityonline.info/feed/
   type: blog
   source: SecurityOnline
+  enabled: true
 
-- url: https://www.helpnetsecurity.com/feed/
+- name: "HelpNetSecurity"
+  url: https://www.helpnetsecurity.com/feed/
   type: news
   source: HelpNetSecurity
+  enabled: true
 
-- url: https://www.grahamcluley.com/feed/
+- name: "Graham Cluley"
+  url: https://www.grahamcluley.com/feed/
   type: blog
   source: Graham Cluley
+  enabled: true
 
-- url: https://news.sophos.com/en-us/feed/
+- name: "Sophos News"
+  url: https://news.sophos.com/en-us/feed/
   type: vendor-blog
   source: Sophos
+  enabled: true
 
-- url: https://feeds.feedblitz.com/thesecurityledger
+- name: "The Security Ledger"
+  url: https://feeds.feedblitz.com/thesecurityledger
   type: blog
   source: The Security Ledger
+  enabled: true
 
-- url: https://www.techworm.net/feed/
+- name: "TechWorm"
+  url: https://www.techworm.net/feed/
   type: blog
   source: TechWorm
+  enabled: true
 
-- url: https://informationsecuritybuzz.com/feed/
+- name: "InfoSecBuzz"
+  url: https://informationsecuritybuzz.com/feed/
   type: news
   source: InfoSecBuzz
+  enabled: true
 
-- url: https://binaryblogger.com/.../securitynews/feed/
+- name: "BinaryBlogger"
+  url: https://binaryblogger.com/.../securitynews/feed/
   type: blog
   source: BinaryBlogger
+  enabled: false
 
-- url: https://gbhackers.com/feed/
+- name: "GBHackers"
+  url: https://gbhackers.com/feed/
   type: blog
   source: GBHackers
+  enabled: true
 
-- url: https://krebsonsecurity.com/feed
+- name: "KrebsOnSecurity"
+  url: https://krebsonsecurity.com/feed
   type: blog
   source: KrebsOnSecurity
+  enabled: true
 
-- url: https://feeds.feedburner.com/TheHackersNews
+- name: "The Hacker News"
+  url: https://feeds.feedburner.com/TheHackersNews
   type: news
   source: The Hacker News
+  enabled: true
 
-- url: https://threatpost.com/feed/
+- name: "Threatpost"
+  url: https://threatpost.com/feed/
   type: blog
   source: Threatpost
+  enabled: true
 
-- url: https://www.darkreading.com/rss.xml
+- name: "DarkReading"
+  url: https://www.darkreading.com/rss.xml
   type: news
   source: DarkReading
+  enabled: true
 
-- url: https://www.bleepingcomputer.com/feed/
+- name: "BleepingComputer"
+  url: https://www.bleepingcomputer.com/feed/
   type: news
   source: BleepingComputer
+  enabled: true
 
-- url: https://www.securityweek.com/feed/
+- name: "SecurityWeek"
+  url: https://www.securityweek.com/feed/
   type: news
   source: SecurityWeek
+  enabled: true
 
-- url: http://feeds.feedburner.com/Nixcraft-LinuxFreebsdSolarisTipsTricks
+- name: "nixCraft"
+  url: http://feeds.feedburner.com/Nixcraft-LinuxFreebsdSolarisTipsTricks
   type: sysadmin-tips
   source: nixCraft
+  enabled: false
 
-- url: http://www.reddit.com/r/netsec/.rss
+- name: "Reddit NetSec"
+  url: http://www.reddit.com/r/netsec/.rss
   type: community
   source: RedditNetsec
+  enabled: true
 
-- url: https://googleprojectzero.blogspot.com/feeds/posts/default
+- name: "Google Project Zero"
+  url: https://googleprojectzero.blogspot.com/feeds/posts/default
   type: research
   source: Google Project Zero
+  enabled: true
 
-- url: http://blog.trailofbits.com/feed/
+- name: "Trail of Bits"
+  url: http://blog.trailofbits.com/feed/
   type: research
   source: Trail of Bits
+  enabled: true
 
-- url: https://research.kudelskisecurity.com/feed/
+- name: "Kudelski Security"
+  url: https://research.kudelskisecurity.com/feed/
   type: research
   source: Kudelski Security
+  enabled: true
 
-- url: https://blog.skullsecurity.org/
+- name: "SkullSecurity"
+  url: https://blog.skullsecurity.org/
   type: research
   source: SkullSecurity
+  enabled: false
 
-- url: https://www.imperialviolet.org/iv-rss.xml
+- name: "Adam Langley (Google)"
+  url: https://www.imperialviolet.org/iv-rss.xml
   type: cryptography
   source: Adam Langley (Google)
+  enabled: true
 
-- url: http://feeds.feedburner.com/schneier/fulltext
+- name: "Bruce Schneier"
+  url: http://feeds.feedburner.com/schneier/fulltext
   type: blog
   source: Bruce Schneier
+  enabled: true
 
-- url: https://cvefeed.io/rssfeed/severity/high.xml
+- name: "CVEFeed.io High"
+  url: https://cvefeed.io/rssfeed/severity/high.xml
   type: cve
   source: CVEFeed.io
+  enabled: true
 
-- url: https://api.msrc.microsoft.com/update-guide/rss
+- name: "Microsoft MSRC CVE"
+  url: https://api.msrc.microsoft.com/update-guide/rss
   type: cve
   source: Microsoft MSRC
+  enabled: true

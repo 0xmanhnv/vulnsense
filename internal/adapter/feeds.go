@@ -2,6 +2,10 @@ package adapter
 
 import (
 	"context"
+	"log/slog"
+	"net/http"
+	"time"
+	"vulnsense/internal/config"
 	"vulnsense/internal/domain"
 	"vulnsense/internal/usecase"
 )
@@ -21,7 +25,6 @@ func (p *OpenCVEProvider) Fetch(ctx context.Context) ([]domain.Vulnerability, er
 			Product: domain.Product{
 				Name: "Log4j",
 			},
-			AffectedVersions: []string{"<=2.15.0"},
 		},
 	}, nil
 }
@@ -41,14 +44,42 @@ func (p *NVDProvider) Fetch(ctx context.Context) ([]domain.Vulnerability, error)
 			Product: domain.Product{
 				Name: "Spring Framework",
 			},
-			AffectedVersions: []string{"5.3.0 to 5.3.17", "5.2.0 to 5.2.19"},
 		},
 	}, nil
 }
 
-func NewFeedProviders() []usecase.FeedProvider {
-	return []usecase.FeedProvider{
+// NewFeedProviders creates and returns all configured feed providers including RSS feeds
+func NewFeedProviders(cfg *config.Config, logger *slog.Logger) []usecase.FeedProvider {
+	providers := []usecase.FeedProvider{
 		&OpenCVEProvider{},
 		&NVDProvider{},
 	}
+
+	// Add RSS feed providers from configuration
+	httpClient := &http.Client{
+		Timeout: 30 * time.Second,
+	}
+
+	for _, source := range cfg.RSSSources {
+		if !source.Enabled {
+			continue // Skip disabled feeds
+		}
+
+		// Create RSS adapter
+		rssAdapter := NewRSSFeedAdapter(
+			source.Name,
+			source.URL,
+			source.Type,
+			source.Source,
+			httpClient,
+			logger,
+		)
+
+		// Wrap with converter adapter
+		feedProvider := NewFeedProviderAdapter(rssAdapter)
+		providers = append(providers, feedProvider)
+	}
+
+	logger.Info("Initialized feed providers", "count", len(providers), "rss_feeds", len(cfg.RSSSources))
+	return providers
 }

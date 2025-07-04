@@ -85,7 +85,7 @@ func New(ctx context.Context) (*App, error) {
 	// -- Adapters --
 	alerter := adapter.NewTelegramAlerter(cfg.Telegram, logger)
 	assetFetcher := adapter.NewSplunkAssetFetcher(cfg.Splunk, logger)
-	feedProviders := adapter.NewFeedProviders()
+	feedProviders := adapter.NewFeedProviders(cfg, logger)
 
 	// -- Use Cases --
 	app.fetchVulns = usecase.NewFetchVulnerabilitiesUseCase(feedProviders, vulnRepo, logger)
