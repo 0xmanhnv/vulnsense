@@ -30,3 +30,38 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Temporary files and directories
+tmp/
+air.log
+
+# Build artifacts
+bin/
+dist/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Log files
+*.log
+logs/
+
+# Test files
+test-orm-integration
+t.txt
+
+# Configuration files with sensitive data
+configs/app.env
